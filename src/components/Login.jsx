@@ -1,16 +1,18 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router";
+
 import { useToast } from "../context/ToastContext";
 import { addUser } from "../utils/userSlice";
-
+import { BASE_URL } from "../utils/constants";
 const Login = () => {
   const [loginMethod, setLoginMethod] = useState("email");
   const [identifier, setIdentifier] = useState("john.doe@example.com");
   const [password, setPassword] = useState("SecurePass123");
   const { addToast } = useToast();
   const dispatch = useDispatch();
-
+  const navigate = useNavigate();
   const getInputConfig = () => {
     switch (loginMethod) {
       case "email":
@@ -32,7 +34,7 @@ const Login = () => {
     };
 
     try {
-      const baseUrl = "http://localhost:3000/api";
+      const baseUrl = BASE_URL;
       const res = await axios.post(`${baseUrl}/auth/login`, payload, {
         withCredentials: true,
       });
@@ -58,6 +60,7 @@ const Login = () => {
           if (user.data.success) {
             dispatch(addUser(user.data.data));
           }
+          navigate("/feed");
         } catch (userError) {
           console.error("Failed to fetch user profile:", userError);
           // Don't show error toast - login was still successful

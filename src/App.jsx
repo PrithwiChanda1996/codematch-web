@@ -4,7 +4,7 @@ import Login from "./components/Login";
 import Signup from "./components/Signup";
 import Toast from "./components/Toast";
 import { ToastProvider } from "./context/ToastContext";
-
+import Feed from "./components/Feed";
 function App() {
   return (
     <ToastProvider>
@@ -13,6 +13,7 @@ function App() {
           <Route path="/" element={<Body />}>
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
+            <Route path="/feed" element={<Feed />} />
           </Route>
         </Routes>
       </BrowserRouter>

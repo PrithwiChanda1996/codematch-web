@@ -1,5 +1,6 @@
 import React from 'react'
 import { Outlet } from 'react-router'
+
 import NavBar from './NavBar'
 import Footer from './Footer'
 
@@ -8,7 +9,7 @@ const Body = () => {
     <>
       <NavBar />
       <Outlet />
-      <Footer />
+      <Footer /> 
     </>
   )
 }

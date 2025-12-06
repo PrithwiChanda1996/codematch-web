@@ -17,6 +17,7 @@ const NavBar = () => {
         </a>
       </div>
       <div className="flex gap-2">
+        {user && <p className="text-sm font-bold flex items-center gap-2">Welcome, {user.username}</p>}
         <div className="dropdown dropdown-end mx-5">
           <div
             tabIndex={0}
