@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router";
+import { Link, useNavigate } from "react-router";
 
 import { useToast } from "../context/ToastContext";
 import { addUser } from "../utils/userSlice";
@@ -155,10 +155,12 @@ const Login = () => {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
-            <p className="text-sm text-gray-500 text-right">Forgot password?</p>
-            <p className="text-sm text-gray-500 text-right">
-              Don't have an account?
-            </p>
+            <Link to="/forgot-password" className="text-sm text-gray-500 text-right">
+              <p>Forgot password?</p>
+            </Link>
+            <Link to="/signup" className="text-sm text-gray-500 text-right">
+              <p>Don't have an account?</p>
+            </Link>
           </div>
           <div className="card-actions justify-end mt-2">
             <button className="btn btn-primary" onClick={handleLogin}>

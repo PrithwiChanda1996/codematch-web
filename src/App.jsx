@@ -9,6 +9,8 @@ import AuthProvider from "./components/AuthProvider";
 import ProtectedRoute from "./components/ProtectedRoute";
 import PublicRoute from "./components/PublicRoute";
 import RootRedirect from "./components/RootRedirect";
+import Profile from "./components/Profile";
+import ForgotPassword from "./components/ForgotPassword";
 function App() {
   return (
     <ToastProvider>
@@ -34,10 +36,26 @@ function App() {
                 }
               />
               <Route
+                path="/forgot-password"
+                element={
+                  <PublicRoute>
+                    <ForgotPassword />
+                  </PublicRoute>
+                }
+              />
+              <Route
                 path="/feed"
                 element={
                   <ProtectedRoute>
                     <Feed />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/profile"
+                element={
+                  <ProtectedRoute>
+                    <Profile />
                   </ProtectedRoute>
                 }
               />
