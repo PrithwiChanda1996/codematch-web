@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import avatar from "../assets/images/avatar.png";
+import avatar from "../assets/logo/avatar.png";
 import FeedActions from "./FeedActions";
 
 const userCard = ({ user, actions }) => {

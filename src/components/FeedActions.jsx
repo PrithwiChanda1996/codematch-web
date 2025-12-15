@@ -1,7 +1,7 @@
 import React from "react";
-import connect from "../assets/images/connect.png";
-import block from "../assets/images/block.png";
-import ignore from "../assets/images/ignore.png";
+import connect from "../assets/icons/connect.png";
+import block from "../assets/icons/block.png";
+import ignore from "../assets/icons/ignore.png";
 
 const FeedActions = ({ user }) => {
   return (

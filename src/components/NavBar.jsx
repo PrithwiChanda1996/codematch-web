@@ -1,7 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import logo from "../assets/images/logo.png";
-import avatar from "../assets/images/avatar.png";
+import logo from "../assets/logo/logo.png";
+import avatar from "../assets/logo/avatar.png";
 import { useAuth } from "../hooks/useAuth";
 import { Link } from "react-router";
 const NavBar = () => {
