@@ -12,6 +12,7 @@ import RootRedirect from "./components/RootRedirect";
 import Profile from "./components/Profile";
 import EditProfile from "./components/EditProfile";
 import ForgotPassword from "./components/ForgotPassword";
+import { Connections } from "./components/Connections";
 function App() {
   return (
     <ToastProvider>
@@ -65,6 +66,14 @@ function App() {
                 element={
                   <ProtectedRoute>
                     <EditProfile />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/connections"
+                element={
+                  <ProtectedRoute>
+                    <Connections />
                   </ProtectedRoute>
                 }
               />
