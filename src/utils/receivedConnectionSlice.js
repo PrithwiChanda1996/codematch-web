@@ -10,7 +10,7 @@ const receivedConnectionSlice = createSlice({
     removereceivedConnections: (state, action) => {
       return null;
     },
-    removeConnectionById: (state, action) => {
+    removeReceivedConnectionById: (state, action) => {
       if (state && Array.isArray(state)) {
         return state.filter((connection) => connection._id !== action.payload);
       }
@@ -22,6 +22,6 @@ const receivedConnectionSlice = createSlice({
 export const {
   setreceivedConnections,
   removereceivedConnections,
-  removeConnectionById,
+  removeReceivedConnectionById,
 } = receivedConnectionSlice.actions;
 export default receivedConnectionSlice.reducer;

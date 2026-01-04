@@ -3,8 +3,9 @@ import axios from "axios";
 import { useDispatch } from "react-redux";
 import { BASE_URL } from "../utils/constants";
 import { getStoredAuth } from "../utils/authUtils";
-import { removeConnectionById } from "../utils/receivedConnectionSlice";
+import { removeReceivedConnectionById } from "../utils/receivedConnectionSlice";
 import { addMutualConnection } from "../utils/mutualConnectionSlice";
+import { removeSentConnectionById } from "../utils/sentConnectionSlice";
 
 const acceptConnection = async (requestId, connection, dispatch) => {
   try {
@@ -22,7 +23,7 @@ const acceptConnection = async (requestId, connection, dispatch) => {
     );
 
     // Update Redux store on success
-    dispatch(removeConnectionById(requestId));
+    dispatch(removeReceivedConnectionById(requestId));
     dispatch(addMutualConnection(connection));
 
     return response.data;
@@ -48,11 +49,35 @@ const rejectConnection = async (requestId, dispatch) => {
     );
 
     // Update Redux store on success
-    dispatch(removeConnectionById(requestId));
+    dispatch(removeReceivedConnectionById(requestId));
 
     return response.data;
   } catch (error) {
     console.error("Error rejecting connection:", error);
+    throw error;
+  }
+};
+
+const cancelSentConnection = async (requestId, dispatch) => {
+  try {
+    const { accessToken } = getStoredAuth();
+    const response = await axios.delete(
+      `${BASE_URL}/connections/${requestId}/cancel`,
+      {
+        withCredentials: true,
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+          "Content-Type": "application/json",
+        },
+      }
+    );
+
+    // Update Redux store on success - remove from sent connections
+    dispatch(removeSentConnectionById(requestId));
+
+    return response.data;
+  } catch (error) {
+    console.error("Error cancelling sent request:", error);
     throw error;
   }
 };
@@ -96,5 +121,19 @@ export const AcceptRejectButtons = ({ connection }) => {
 };
 
 export const CancelButton = ({ connection }) => {
-  return <button className="btn btn-warning btn-sm">Cancel</button>;
+  const dispatch = useDispatch();
+  const { _id: requestId } = connection;
+
+  const handleCancel = async () => {
+    try {
+      await cancelSentConnection(requestId, dispatch);
+    } catch (error) {
+      console.error("Failed to cancel sent request");
+    }
+  };
+  return (
+    <button className="btn btn-warning btn-sm" onClick={handleCancel}>
+      Cancel
+    </button>
+  );
 };
