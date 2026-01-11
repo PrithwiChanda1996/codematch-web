@@ -32,9 +32,22 @@ const Feed = () => {
     getFeed();
   }, []);
   return (
-    <div className=" flex justify-center my-4 pb-13 ">
-      {feed && (
+    <div className="flex justify-center my-4 pb-13">
+      {feed && feed[0] ? (
         <UserCard user={feed[0]} actions={<FeedActions user={feed[0]} />} />
+      ) : (
+        <div className="card bg-base-300 w-96 shadow-sm rounded-md p-8">
+          <div className="text-center space-y-4">
+            <h2 className="text-xl font-semibold">No more users to show</h2>
+            <p className="text-gray-400">Reload to see fresh suggestions</p>
+            <button
+              onClick={() => window.location.reload()}
+              className="btn btn-primary"
+            >
+              Reload Feed
+            </button>
+          </div>
+        </div>
       )}
     </div>
   );
