@@ -1,19 +1,26 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { Link, useNavigate } from "react-router";
+import { Link, useNavigate, useLocation } from "react-router";
 
 import { useToast } from "../context/ToastContext";
 import { addUser } from "../utils/userSlice";
 import { BASE_URL } from "../utils/constants";
 import { setStoredAuth } from "../utils/authUtils";
+import Loader from "./Loader";
+
 const Login = () => {
   const [loginMethod, setLoginMethod] = useState("email");
   const [identifier, setIdentifier] = useState("john.doe@example.com");
   const [password, setPassword] = useState("SecurePass123");
+  const [isLoading, setIsLoading] = useState(false);
   const { addToast } = useToast();
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const location = useLocation();
+  
+  // Get the page user was trying to access, default to /feed
+  const from = location.state?.from || "/feed";
   const getInputConfig = () => {
     switch (loginMethod) {
       case "email":
@@ -33,6 +40,8 @@ const Login = () => {
       [payloadKey]: identifier,
       password,
     };
+
+    setIsLoading(true);
 
     try {
       const baseUrl = BASE_URL;
@@ -58,14 +67,18 @@ const Login = () => {
           });
           if (user.data.success) {
             dispatch(addUser(user.data.data));
+            
+            // Navigate to the page user was trying to access or default to feed
+            navigate(from);
           }
-          navigate("/feed");
         } catch (userError) {
           console.error("Failed to fetch user profile:", userError);
-          // Don't show error toast - login was still successful
+          setIsLoading(false);
+          addToast("error", "Failed to load profile. Please try again.");
         }
       }
     } catch (error) {
+      setIsLoading(false);
       const response = error.response?.data;
       if (response?.message) {
         if (Array.isArray(response.message)) {
@@ -84,7 +97,9 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center">
+    <div className="min-h-screen flex items-center justify-center relative">
+      <Loader isLoading={isLoading} message="Logging you in..." />
+      
       <div className="card card-dash bg-base-300 w-96 ">
         <div className="card-body">
           <h2 className="card-title flex items-center justify-center">Login</h2>
@@ -163,8 +178,12 @@ const Login = () => {
             </Link>
           </div>
           <div className="card-actions justify-end mt-2">
-            <button className="btn btn-primary" onClick={handleLogin}>
-              Login
+            <button 
+              className="btn btn-primary" 
+              onClick={handleLogin}
+              disabled={isLoading}
+            >
+              {isLoading ? "Logging in..." : "Login"}
             </button>
           </div>
         </div>

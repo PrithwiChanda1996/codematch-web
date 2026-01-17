@@ -1,11 +1,12 @@
 import React from "react";
-import { Navigate } from "react-router";
+import { Navigate, useLocation } from "react-router";
 import { useSelector } from "react-redux";
 import { useAuthLoading } from "./AuthProvider";
 
 const ProtectedRoute = ({ children }) => {
   const user = useSelector((state) => state.user);
   const { isAuthLoading } = useAuthLoading();
+  const location = useLocation();
 
   // Show loading state while checking authentication
   if (isAuthLoading) {
@@ -19,9 +20,9 @@ const ProtectedRoute = ({ children }) => {
     );
   }
 
-  // If user is not logged in, redirect to login page
+  // If user is not logged in, redirect to login page with current location
   if (!user) {
-    return <Navigate to="/login" replace />;
+    return <Navigate to="/login" state={{ from: location.pathname }} replace />;
   }
 
   return children;

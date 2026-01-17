@@ -1,13 +1,15 @@
 import React from "react";
-import { Navigate } from "react-router";
+import { Navigate, useLocation } from "react-router";
 import { useSelector } from "react-redux";
 
 const PublicRoute = ({ children }) => {
   const user = useSelector((state) => state.user);
+  const location = useLocation();
 
-  // If user is already logged in, redirect to feed page
+  // If user is already logged in, redirect to the page they came from or feed
   if (user) {
-    return <Navigate to="/feed" replace />;
+    const from = location.state?.from || "/feed";
+    return <Navigate to={from} replace />;
   }
 
   return children;
