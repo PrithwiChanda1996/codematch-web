@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { getStoredAuth } from "../utils/authUtils";
@@ -6,6 +6,7 @@ import { BASE_URL } from "../utils/constants";
 import { removeFirstUserFromFeed } from "../utils/feedSlice";
 import { removesentConnections } from "../utils/sentConnectionSlice";
 import { useToast } from "../context/ToastContext";
+import Modal from "./Modal";
 import connect from "../assets/icons/connect.png";
 import block from "../assets/icons/block.png";
 import ignore from "../assets/icons/ignore.png";
@@ -13,6 +14,7 @@ import ignore from "../assets/icons/ignore.png";
 const FeedActions = ({ user }) => {
   const dispatch = useDispatch();
   const { addToast } = useToast();
+  const [showBlockModal, setShowBlockModal] = useState(false);
 
   const handleConnect = async () => {
     const { accessToken } = getStoredAuth();
@@ -44,6 +46,35 @@ const FeedActions = ({ user }) => {
     dispatch(removeFirstUserFromFeed());
   };
 
+  const handleBlock = () => {
+    setShowBlockModal(true);
+  };
+
+  const handleConfirmBlock = async () => {
+    const { accessToken } = getStoredAuth();
+    try {
+      await axios.post(
+        `${BASE_URL}/connections/block/${user._id}`,
+        {},
+        {
+          withCredentials: true,
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        }
+      );
+      dispatch(removeFirstUserFromFeed());
+      addToast("success", "User blocked successfully!");
+      setShowBlockModal(false);
+    } catch (error) {
+      console.error("Error blocking user:", error);
+      addToast(
+        "error",
+        error.response?.data?.message || "Failed to block user"
+      );
+    }
+  };
+
   return (
     <>
       <button
@@ -62,10 +93,26 @@ const FeedActions = ({ user }) => {
         <span className="text-sm">Ignore</span>
       </button>
 
-      <button className="btn flex flex-col items-center justify-center p-4 h-auto min-h-[90px] w-24 gap-2">
+      <button
+        onClick={handleBlock}
+        className="btn flex flex-col items-center justify-center p-4 h-auto min-h-[90px] w-24 gap-2"
+      >
         <img src={block} className="w-6 h-6" alt="Block" />
         <span className="text-sm">Block</span>
       </button>
+
+      {/* Block Confirmation Modal */}
+      <Modal
+        isOpen={showBlockModal}
+        onClose={() => setShowBlockModal(false)}
+        title="Block User"
+        message={`Are you sure you want to block ${user?.firstName + " " + user?.lastName || user?.username || 'this user'}?`}
+        confirmText="Yes"
+        cancelText="No"
+        onConfirm={handleConfirmBlock}
+        confirmButtonClass="btn-error"
+        cancelButtonClass="btn-ghost"
+      />
     </>
   );
 };
