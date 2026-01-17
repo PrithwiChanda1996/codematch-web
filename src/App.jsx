@@ -31,11 +31,7 @@ function App() {
               />
               <Route
                 path="/signup"
-                element={
-                  <PublicRoute>
-                    <Signup />
-                  </PublicRoute>
-                }
+                element={<Signup />}
               />
               <Route
                 path="/forgot-password"
