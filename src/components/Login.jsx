@@ -157,14 +157,14 @@ const Login = () => {
     <div className="flex items-center justify-center relative px-4 py-6">
       <Loader isLoading={isLoading} message="Logging you in..." />
       
-      <div className="card bg-base-300 w-full max-w-md shadow-xl rounded-lg">
-        <div className="card-body p-5 sm:p-6">
+      <div className="card bg-base-300 w-full max-w-md md:max-w-lg shadow-xl rounded-lg">
+        <div className="card-body p-5 sm:p-6 md:p-8">
           {/* Header */}
-          <div className="text-center mb-4">
-            <h2 className="text-xl sm:text-2xl font-bold text-base-content">
+          <div className="text-center mb-4 md:mb-6">
+            <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-base-content">
               Welcome Back
             </h2>
-            <p className="text-xs sm:text-sm text-base-content/70 mt-1">
+            <p className="text-xs sm:text-sm md:text-base text-base-content/70 mt-1">
               Sign in to continue to DevTinder
             </p>
           </div>
@@ -229,7 +229,7 @@ const Login = () => {
           </div>
 
           {/* Form */}
-          <form onSubmit={handleLogin} className="space-y-3">
+          <form onSubmit={handleLogin} className="space-y-3 md:space-y-4">
             {/* Dynamic input based on selection */}
             <div className="form-control">
               <label className="label pb-1">
