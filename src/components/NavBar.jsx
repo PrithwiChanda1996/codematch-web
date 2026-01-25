@@ -1,7 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import logo from "../assets/logo/logo.png";
-import avatar from "../assets/logo/avatar.png";
+import defaultAvatar from "../assets/logo/default-avatar.svg";
 import { useAuth } from "../hooks/useAuth";
 import { Link } from "react-router";
 
@@ -53,11 +53,11 @@ const NavBar = () => {
                 />
               </div>
             ) : (
-              <div className="w-8 h-8 sm:w-9 sm:h-9 md:w-10 md:h-10 rounded-full ring-2 ring-base-content/20 ring-offset-2 ring-offset-base-300">
+              <div className="w-8 h-8 sm:w-9 sm:h-9 md:w-10 md:h-10 rounded-full ring-2 ring-base-content/20 ring-offset-2 ring-offset-base-300 bg-base-200 flex items-center justify-center overflow-hidden">
                 <img
                   alt="Default avatar"
-                  src={avatar}
-                  className="rounded-full object-cover"
+                  src={defaultAvatar}
+                  className="w-full h-full object-contain"
                 />
               </div>
             )}

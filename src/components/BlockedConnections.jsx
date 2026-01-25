@@ -6,7 +6,7 @@ import { BASE_URL } from "../utils/constants";
 import { setBlockedConnections } from "../utils/blockedConnectionSlice";
 import ConnectionCard from "./ConnectionCard";
 import { UnblockButton } from "./ConnectionActions";
-import avatar from "../assets/logo/avatar.png";
+import defaultAvatar from "../assets/logo/default-avatar.svg";
 
 const BlockedConnections = () => {
   const connections = useSelector((store) => store.blockedConnection);
@@ -56,7 +56,7 @@ const BlockedConnections = () => {
       firstName: blockedUserData.firstName,
       lastName: blockedUserData.lastName,
       username: blockedUserData.username,
-      profilePhoto: blockedUserData.profilePhoto || avatar,
+      profilePhoto: blockedUserData.profilePhoto || defaultAvatar,
     };
   };
 

@@ -6,7 +6,7 @@ import { BASE_URL } from "../utils/constants";
 import { setreceivedConnections } from "../utils/receivedConnectionSlice";
 import ConnectionCard from "./ConnectionCard";
 import { AcceptRejectButtons } from "./ConnectionActions";
-import avatar from "../assets/logo/avatar.png";
+import defaultAvatar from "../assets/logo/default-avatar.svg";
 
 const ReceivedConnections = () => {
   const connections = useSelector((store) => store.receivedConnection);
@@ -56,7 +56,7 @@ const ReceivedConnections = () => {
       firstName: senderData.firstName,
       lastName: senderData.lastName,
       username: senderData.username,
-      profilePhoto: senderData.profilePhoto || avatar,
+      profilePhoto: senderData.profilePhoto || defaultAvatar,
     };
   };
 

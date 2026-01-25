@@ -6,7 +6,7 @@ import { useToast } from "../context/ToastContext";
 import { BASE_URL } from "../utils/constants";
 import { getStoredAuth } from "../utils/authUtils";
 import { addUser } from "../utils/userSlice";
-import avatar from "../assets/logo/avatar.png";
+import defaultAvatar from "../assets/logo/default-avatar.svg";
 
 const EditProfile = () => {
   // Get user data directly from Redux store
@@ -162,9 +162,9 @@ const EditProfile = () => {
             <div className="form-control">
               <div className="mt-2 flex justify-center">
                   <img
-                    src={formData.profilePhoto || avatar}
+                    src={formData.profilePhoto || defaultAvatar}
                     alt="Profile preview"
-                    className="w-24 h-24 rounded-full object-cover"
+                    className="w-24 h-24 rounded-full object-cover bg-base-200"
                   />
                 </div>
             </div>
