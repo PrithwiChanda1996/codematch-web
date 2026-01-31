@@ -5,7 +5,7 @@ const Footer = () => {
     <footer className="footer sm:footer-horizontal footer-center bg-base-300 text-base-content p-4 mt-auto">
       <aside>
         <p className="text-xs sm:text-sm">
-          Copyright © {new Date().getFullYear()} - All right reserved by DevTinder
+          Copyright © {new Date().getFullYear()} - All right reserved by CodeMatch
         </p>
       </aside>
     </footer>

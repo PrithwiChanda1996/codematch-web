@@ -165,7 +165,7 @@ const Login = () => {
               Welcome Back
             </h2>
             <p className="text-xs sm:text-sm md:text-base text-base-content/70 mt-1">
-              Sign in to continue to DevTinder
+              Sign in to continue to CodeMatch
             </p>
           </div>
 

@@ -160,7 +160,7 @@ const Signup = () => {
               Create Account
             </h2>
             <p className="text-xs sm:text-sm md:text-base text-base-content/70 mt-0.5">
-              Join DevTinder to connect with developers
+              Join CodeMatch to connect with developers
             </p>
           </div>
 

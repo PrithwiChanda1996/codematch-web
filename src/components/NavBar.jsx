@@ -16,14 +16,14 @@ const NavBar = () => {
         <Link
           to="/"
           className="btn btn-ghost text-base sm:text-lg md:text-xl gap-1.5 sm:gap-2 px-2 sm:px-4 min-h-0 h-auto py-2"
-          aria-label="DevTinder Home"
+          aria-label="CodeMatch Home"
         >
           <img
             src={logo}
-            alt="DevTinder Logo"
+            alt="CodeMatch Logo"
             className="w-8 h-8 sm:w-9 sm:h-9 md:w-10 md:h-10 rounded-full"
           />
-          <span className="font-semibold">DevTinder</span>
+          <span className="font-semibold">CodeMatch</span>
         </Link>
       </div>
 
