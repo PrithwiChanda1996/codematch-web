@@ -28,12 +28,16 @@ const UserCard = ({ user, actions }) => {
   return (
     <div className="w-full max-w-sm sm:max-w-md md:max-w-lg">
       <div className="card bg-base-300 shadow-xl rounded-lg overflow-hidden">
-        {/* Profile Image - More compact */}
-        <figure className="h-56 sm:h-64 md:h-72 w-full overflow-hidden bg-base-200 flex items-center justify-center">
+        {/* Profile Image - Square aspect ratio for 400x400 crops */}
+        <figure className="aspect-square w-full max-w-md mx-auto overflow-hidden bg-base-200 flex items-center justify-center">
           <img
             src={profilePhoto || defaultAvatar}
             alt={`${firstName} ${lastName}'s profile`}
-            className={`${profilePhoto ? 'w-full h-full object-cover' : 'w-full h-full object-contain'}`}
+            className={`${
+              profilePhoto
+                ? "w-full h-full object-cover"
+                : "w-3/4 h-3/4 object-contain"
+            }`}
             loading="lazy"
           />
         </figure>
