@@ -12,6 +12,7 @@ import RootRedirect from "./components/RootRedirect";
 import Profile from "./components/Profile";
 import EditProfile from "./components/EditProfile";
 import ForgotPassword from "./components/ForgotPassword";
+import ResetPassword from "./components/ResetPassword";
 import { Connections } from "./components/Connections";
 function App() {
   return (
@@ -38,6 +39,14 @@ function App() {
                 element={
                   <PublicRoute>
                     <ForgotPassword />
+                  </PublicRoute>
+                }
+              />
+              <Route
+                path="/reset-password"
+                element={
+                  <PublicRoute>
+                    <ResetPassword />
                   </PublicRoute>
                 }
               />

@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate, useLocation } from "react-router";
 
@@ -21,9 +21,29 @@ const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
-  
+  const passwordResetToastShown = useRef(false);
+
   // Get the page user was trying to access, default to /feed
   const from = location.state?.from || "/feed";
+
+  useEffect(() => {
+    if (
+      location.state?.passwordResetSuccess &&
+      !passwordResetToastShown.current
+    ) {
+      passwordResetToastShown.current = true;
+      addToast(
+        "success",
+        "Password has been reset successfully. You can log in with your new password."
+      );
+      navigate(location.pathname, { replace: true, state: {} });
+    }
+  }, [
+    location.state,
+    location.pathname,
+    navigate,
+    addToast,
+  ]);
 
   const getInputConfig = () => {
     switch (loginMethod) {

@@ -21,7 +21,13 @@ const AuthProvider = ({ children }) => {
     const initAuth = async () => {
       // Use initial path to determine if session restoration is needed
       // This prevents re-running when routes change during authentication
-      const publicPaths = ["/", "/login", "/signup", "/forgot-password"];
+      const publicPaths = [
+        "/",
+        "/login",
+        "/signup",
+        "/forgot-password",
+        "/reset-password",
+      ];
       const isPublicPage = publicPaths.includes(initialPath);
 
       if (!isPublicPage) {
