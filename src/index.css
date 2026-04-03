@@ -1,14 +1,14 @@
 @import "tailwindcss";
 @plugin "daisyui";
 
-/* Toast slide-in animation */
-@keyframes slide-in {
+/* Toast enter (bottom-centered / corner) */
+@keyframes toast-in {
   from {
-    transform: translateX(100%);
+    transform: translateY(0.75rem);
     opacity: 0;
   }
   to {
-    transform: translateX(0);
+    transform: translateY(0);
     opacity: 1;
   }
 }

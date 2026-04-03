@@ -182,7 +182,7 @@ const Login = () => {
           {/* Header */}
           <div className="text-center mb-4 md:mb-6">
             <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-base-content">
-              Welcome Back
+              Welcome
             </h2>
             <p className="text-xs sm:text-sm md:text-base text-base-content/70 mt-1">
               Sign in to continue to CodeMatch
